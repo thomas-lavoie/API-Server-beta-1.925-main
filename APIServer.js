@@ -6,6 +6,7 @@ import process from 'process';
 import dateAndTime from 'date-and-time';
 import HttpContext from './httpContext.js';
 import MiddlewaresPipeline from './middlewaresPipeline.js';
+import CachedRequestsManager from "./models/cachedRequestsManager.js";
 import * as router from './router.js';
 import { handleCORSPreflight } from './cors.js';
 import { handleStaticResourceRequest } from './staticResourcesServer.js';
@@ -27,6 +28,7 @@ export default class APIServer {
         this.middlewaresPipeline.add(handleStaticResourceRequest);
 
         // API middlewares
+        this.middlewaresPipeline.add(CachedRequestsManager.get);
         this.middlewaresPipeline.add(router.API_EndPoint);
     }
     async handleHttpRequest(req, res) {

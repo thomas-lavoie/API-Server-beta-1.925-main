@@ -10,7 +10,7 @@ import CachedRequestsManager from "./models/cachedRequestsManager.js";
 
 export default class MiddlewaresPipeline {
     constructor() {
-        this.middlewares = [CachedRequestsManager.get];
+        this.middlewares = [];
     }
     add(middleware) {
         this.middlewares.push(middleware);
